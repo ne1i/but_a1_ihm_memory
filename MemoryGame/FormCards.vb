@@ -10,7 +10,7 @@ Public Class FormCards
 
     Private totalTime = TOTAL_TIME * getTotalTimeMult()
 
-    Private WithEvents timerTpsRestant As New Windows.Forms.Timer()
+    Private WithEvents timerTpsRestant As Windows.Forms.Timer
     Private tpsRestant As Integer = totalTime
     Private tpsRestantDepuisCarre As Integer = tpsRestant
 
@@ -47,6 +47,7 @@ Public Class FormCards
 
 
     Private Sub FormCards_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        timerTpsRestant = New Windows.Forms.Timer()
         labelTpsRestant.Text = (totalTime).ToString() & " secondes"
         timerTpsRestant.Interval = INTERVAL
 
@@ -78,7 +79,7 @@ Public Class FormCards
             timerTpsRestant.Stop()
             If MsgBox("Temps écoulé, vous avez perdu ! " & playerScore / MAXIMUM_CARDS_SHOWN & " carré(s) en " & tpsRestantDepuisCarre & " secondes.", MsgBoxStyle.OkOnly) = MsgBoxResult.Ok Then
                 MyPlayers.Instance.updatePlayer(playerName, playerTime, playerScore)
-                Me.Hide()
+                Me.Close()
                 Form4Memory.Show()
             End If
         End If
